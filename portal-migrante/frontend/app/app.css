@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Buttons & Links (components)
+   ========================= */
+@layer components {
+  /* زر أساسي: أساس مشترك */
+  .btn {
+    @apply inline-flex items-center justify-center
+           rounded-lg px-4 py-2 text-sm font-medium
+           transition focus:outline-none
+           focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  /* Primary */
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+           rounded-lg px-4 py-2 text-sm font-medium
+           transition focus:outline-none
+           focus-visible:ring-2 focus-visible:ring-offset-2
+           bg-neutral-900 text-white hover:bg-neutral-800 active:bg-black;
+  }
+
+  /* Ghost */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center
+           rounded-lg px-3 py-2 text-sm font-medium
+           transition text-neutral-700 hover:bg-neutral-100;
+  }
+
+  /* روابط النافبار */
+  .link-nav {
+    @apply inline-flex items-center gap-1 px-3 py-2 rounded-md
+           text-sm text-neutral-700 hover:text-black hover:bg-neutral-100;
+  }
+
+  /* شارة اللغة */
+  .lang-badge {
+    @apply rounded-md border px-2 py-1 text-sm;
+  }
+}
