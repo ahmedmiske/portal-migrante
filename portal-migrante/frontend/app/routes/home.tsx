@@ -1,11 +1,8 @@
-﻿import { Link, useNavigate } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { useI18n } from "../i18n";
-import { useState } from "react";
 
 export default function Home() {
   const { t } = useI18n();
-  const [q, setQ] = useState("");
-  const navigate = useNavigate();
 
   const categories = [
     { key: "salud", title: t("cat_health") || "Salud", icon: "❤️", to: "/servicios?c=salud" },
@@ -16,12 +13,6 @@ export default function Home() {
     { key: "idioma", title: t("cat_language") || "Idioma", icon: "🗣️", to: "/servicios?c=idioma" }
   ];
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!q.trim()) return;
-    navigate(`/servicios?search=${encodeURIComponent(q.trim())}`);
-  };
-
   return (
     <main>
       <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-green-800 overflow-hidden">
@@ -29,33 +20,6 @@ export default function Home() {
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600/30 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-600/30 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="absolute top-16 right-8 hidden lg:block">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20 max-w-xs">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
-                <span className="text-white">✓</span>
-              </div>
-              <span className="text-white font-medium text-sm">Historia de éxito</span>
-            </div>
-            <p className="text-white/90 text-sm">
-              "Encontré trabajo en 2 semanas gracias a esta plataforma"
-            </p>
-            <p className="text-white/70 text-xs mt-1">- María, desde Honduras</p>
-          </div>
-        </div>
-
-        <div className="absolute bottom-32 left-8 hidden lg:block">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="text-2xl">🏠</div>
-              <div>
-                <p className="text-white font-medium text-sm">Vivienda encontrada</p>
-                <p className="text-white/70 text-xs">En menos de 1 mes</p>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="absolute top-1/2 right-16 hidden xl:block transform -translate-y-1/2">
@@ -75,20 +39,13 @@ export default function Home() {
                   {t("hero_title_2") || "Euskadi te espera"}
                 </span>
               </h1>
-              
+
               <p className="text-xl sm:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed">
-                {t("hero_description_1") || "Más que información, somos el puente hacia tu nueva vida."} 
+                {t("hero_description_1") || "Más que información, somos el puente hacia tu nueva vida."}
                 <span className="block mt-2 text-green-200">
                   {t("hero_description_2") || "Cada paso importa, cada historia importa, tú importas."}
                 </span>
               </p>
-
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/20">
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-white/90">Personas reales, ayuda real, resultados reales</span>
-                </div>
-              </div>
 
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
@@ -97,7 +54,7 @@ export default function Home() {
                 >
                   Comenzar ahora
                 </Link>
-                
+
                 <Link
                   to="/sobre"
                   className="inline-flex items-center gap-3 border-2 border-white/50 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white/10 hover:border-white transition-all backdrop-blur-sm"
@@ -132,7 +89,7 @@ export default function Home() {
                 className="group relative"
               >
                 <div className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2 border border-gray-100 group-hover:border-blue-200/50">
-                  
+
                   <div className="relative mb-6">
                     <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <span className="text-2xl text-white">{c.icon}</span>
@@ -163,18 +120,8 @@ export default function Home() {
 
       <section className="bg-gradient-to-b from-blue-50 to-green-50 py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              <span className="block">{t("community_title_1") || "Más que servicios,"}</span>
-              <span className="block bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                {t("community_title_2") || "somos comunidad"}
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t("community_description") || "Cada persona que llega trae consigo historias, sueños y esperanzas. Estamos aquí para que ese camino sea más fácil y humano."}
-            </p>
-          </div>
+
+           
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 text-center group hover:bg-white transition-all duration-300 shadow-lg hover:shadow-2xl">
@@ -241,10 +188,10 @@ export default function Home() {
             <span className="block text-green-300">el siguiente paso?</span>
           </h2>
           <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-            No tienes que hacer este camino solo. Estamos aquí para acompañarte, 
+            No tienes que hacer este camino solo. Estamos aquí para acompañarte,
             paso a paso, con toda la información y apoyo que necesitas.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link
               to="/servicios"
@@ -252,7 +199,7 @@ export default function Home() {
             >
               🔍 Explorar servicios
             </Link>
-            
+
             <Link
               to="/contacto"
               className="inline-flex items-center gap-3 border-2 border-white text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white hover:text-blue-900 transition-all"
@@ -260,13 +207,13 @@ export default function Home() {
               💬 Hablar con nosotros
             </Link>
           </div>
-          
+
           <div className="mt-12 flex items-center justify-center gap-8 text-blue-200">
             <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
               <span>Gratuito</span>
             </div>
-            <div className="flex items-center gap-2">  
+            <div className="flex items-center gap-2">
               <span className="text-green-400">✓</span>
               <span>Confidencial</span>
             </div>
