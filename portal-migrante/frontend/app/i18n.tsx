@@ -39,6 +39,13 @@ const dicts: Record<Locale, Dict> = {
     f_legal: "Legal",
     f_work: "Empleo",
     f_language: "Idioma",
+    // Categories for home page
+    cat_health: "Salud",
+    cat_housing: "Vivienda",
+    cat_jobs: "Empleo",
+    cat_education: "Educación",
+    cat_legal: "Legal",
+    cat_language: "Idioma",
     users_title: "Usuarios",
     users_new: "Añadir usuario",
     // Home page news and stats
@@ -238,6 +245,13 @@ const dicts: Record<Locale, Dict> = {
     f_legal: "Legal",
     f_work: "Work",
     f_language: "Language",
+    // Categories for home page
+    cat_health: "Health",
+    cat_housing: "Housing",
+    cat_jobs: "Jobs",
+    cat_education: "Education",
+    cat_legal: "Legal",
+    cat_language: "Language",
     users_title: "Users",
     users_new: "New user",
     // Home page news and stats
@@ -437,6 +451,13 @@ const dicts: Record<Locale, Dict> = {
     f_legal: "القانوني",
     f_work: "العمل",
     f_language: "اللغة",
+    // Categories for home page
+    cat_health: "الصحة",
+    cat_housing: "السكن",
+    cat_jobs: "العمل",
+    cat_education: "التعليم",
+    cat_legal: "القانوني",
+    cat_language: "اللغة",
     users_title: "المستخدمون",
     users_new: "إضافة مستخدم",
     // Home page news and stats
@@ -636,6 +657,13 @@ const dicts: Record<Locale, Dict> = {
     f_legal: "Legezkoa",
     f_work: "Lana",
     f_language: "Hizkuntza",
+    // Categories for home page
+    cat_health: "Osasuna",
+    cat_housing: "Etxebizitza",
+    cat_jobs: "Lana",
+    cat_education: "Hezkuntza",
+    cat_legal: "Legezkoa",
+    cat_language: "Hizkuntza",
     users_title: "Erabiltzaileak",
     users_new: "Erabiltzaile berria",
     // Home page news and stats
