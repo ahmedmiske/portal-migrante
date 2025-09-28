@@ -50,7 +50,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
                   to="/servicios"
-                  className="inline-flex items-center gap-3 bg-white text-blue-900 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all transform hover:scale-105 shadow-2xl"
+                  className="inline-flex items-center gap-3 bg-vitoria-gradient text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105 shadow-2xl"
                 >
                   Comenzar ahora
                 </Link>
@@ -120,8 +120,18 @@ export default function Home() {
 
       <section className="bg-gradient-to-b from-blue-50 to-green-50 py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-           
+          
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              <span className="block">{t("community_title_1") || "Más que servicios,"}</span>
+              <span className="block bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+                {t("community_title_2") || "somos comunidad"}
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t("community_description") || "Cada persona que llega trae consigo historias, sueños y esperanzas. Estamos aquí para que ese camino sea más fácil y humano."}
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 text-center group hover:bg-white transition-all duration-300 shadow-lg hover:shadow-2xl">
