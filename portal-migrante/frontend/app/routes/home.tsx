@@ -70,16 +70,16 @@ export default function Home() {
           <div className="w-full">
             <div className="text-center max-w-5xl mx-auto">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
-                <span className="block">Tu nuevo hogar en</span>
+                <span className="block">{t("hero_title_1") || "Tu nuevo hogar en"}</span>
                 <span className="block bg-gradient-to-r from-green-300 via-blue-300 to-green-300 bg-clip-text text-transparent">
-                  Euskadi te espera
+                  {t("hero_title_2") || "Euskadi te espera"}
                 </span>
               </h1>
               
               <p className="text-xl sm:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed">
-                Más que información, somos el puente hacia tu nueva vida. 
+                {t("hero_description_1") || "Más que información, somos el puente hacia tu nueva vida."} 
                 <span className="block mt-2 text-green-200">
-                  Cada paso importa, cada historia importa, tú importas.
+                  {t("hero_description_2") || "Cada paso importa, cada historia importa, tú importas."}
                 </span>
               </p>
 
@@ -114,13 +114,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              <span className="block">En qué podemos</span>
+              <span className="block">{t("services_title_1") || "En qué podemos"}</span>
               <span className="block bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                ayudarte hoy?
+                {t("services_title_2") || "ayudarte hoy?"}
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Sabemos que cada persona tiene necesidades únicas. Por eso hemos organizado nuestros servicios pensando en lo que realmente importa en tu día a día.
+              {t("services_description") || "Sabemos que cada persona tiene necesidades únicas. Por eso hemos organizado nuestros servicios pensando en lo que realmente importa en tu día a día."}
             </p>
           </div>
 
@@ -166,14 +166,13 @@ export default function Home() {
           
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              <span className="block">Más que servicios,</span>
+              <span className="block">{t("community_title_1") || "Más que servicios,"}</span>
               <span className="block bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                somos comunidad
+                {t("community_title_2") || "somos comunidad"}
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Cada persona que llega trae consigo historias, sueños y esperanzas. 
-              Estamos aquí para que ese camino sea más fácil y humano.
+              {t("community_description") || "Cada persona que llega trae consigo historias, sueños y esperanzas. Estamos aquí para que ese camino sea más fácil y humano."}
             </p>
           </div>
 
@@ -183,10 +182,10 @@ export default function Home() {
                 <span className="text-2xl">⚡</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Información Clara
+                {t("feature_clear_info") || "Información Clara"}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Sin letra pequeña, sin complicaciones. Todo explicado de forma sencilla para que puedas entender y actuar.
+                {t("feature_clear_info_desc") || "Sin letra pequeña, sin complicaciones. Todo explicado de forma sencilla para que puedas entender y actuar."}
               </p>
             </div>
 
@@ -195,10 +194,10 @@ export default function Home() {
                 <span className="text-2xl">🤝</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Comunidad Acogedora
+                {t("feature_welcoming_community") || "Comunidad Acogedora"}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Un espacio donde cada historia importa. Aquí encontrarás apoyo, comprensión y personas que han pasado por lo mismo.
+                {t("feature_welcoming_community_desc") || "Un espacio donde cada historia importa. Aquí encontrarás apoyo, comprensión y personas que han pasado por lo mismo."}
               </p>
             </div>
 
@@ -207,10 +206,10 @@ export default function Home() {
                 <span className="text-2xl">🏢</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Conexión Directa
+                {t("feature_direct_connection") || "Conexión Directa"}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                Te conectamos directamente con las instituciones que necesitas, sin intermediarios ni esperas innecesarias.
+                {t("feature_direct_connection_desc") || "Te conectamos directamente con las instituciones que necesitas, sin intermediarios ni esperas innecesarias."}
               </p>
             </div>
           </div>

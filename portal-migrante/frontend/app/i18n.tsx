@@ -46,6 +46,26 @@ const dicts: Record<Locale, Dict> = {
     cat_education: "Educación",
     cat_legal: "Legal",
     cat_language: "Idioma",
+    // Hero section
+    hero_title_1: "Tu nuevo hogar en",
+    hero_title_2: "Euskadi te espera",
+    hero_description_1: "Más que información, somos el puente hacia tu nueva vida.",
+    hero_description_2: "Cada paso importa, cada historia importa, tú importas.",
+    // Community section
+    community_title_1: "Más que servicios,",
+    community_title_2: "somos comunidad",
+    community_description: "Cada persona que llega trae consigo historias, sueños y esperanzas. Estamos aquí para que ese camino sea más fácil y humano.",
+    // Features
+    feature_clear_info: "Información Clara",
+    feature_clear_info_desc: "Sin letra pequeña, sin complicaciones. Todo explicado de forma sencilla para que puedas entender y actuar.",
+    feature_welcoming_community: "Comunidad Acogedora",
+    feature_welcoming_community_desc: "Un espacio donde cada historia importa. Aquí encontrarás apoyo, comprensión y personas que han pasado por lo mismo.",
+    feature_direct_connection: "Conexión Directa",
+    feature_direct_connection_desc: "Te conectamos directamente con las instituciones que necesitas, sin intermediarios ni esperas innecesarias.",
+    // Services section
+    services_title_1: "En qué podemos",
+    services_title_2: "ayudarte hoy?",
+    services_description: "Sabemos que cada persona tiene necesidades únicas. Por eso hemos organizado nuestros servicios pensando en lo que realmente importa en tu día a día.",
     users_title: "Usuarios",
     users_new: "Añadir usuario",
     // Home page news and stats
@@ -252,6 +272,26 @@ const dicts: Record<Locale, Dict> = {
     cat_education: "Education",
     cat_legal: "Legal",
     cat_language: "Language",
+    // Hero section
+    hero_title_1: "Your new home in",
+    hero_title_2: "Euskadi awaits you",
+    hero_description_1: "More than information, we are the bridge to your new life.",
+    hero_description_2: "Every step matters, every story matters, you matter.",
+    // Community section
+    community_title_1: "More than services,",
+    community_title_2: "we are community",
+    community_description: "Every person who arrives brings stories, dreams and hopes. We are here to make that journey easier and more human.",
+    // Features
+    feature_clear_info: "Clear Information",
+    feature_clear_info_desc: "No small print, no complications. Everything explained simply so you can understand and act.",
+    feature_welcoming_community: "Welcoming Community",
+    feature_welcoming_community_desc: "A space where every story matters. Here you'll find support, understanding and people who have been through the same.",
+    feature_direct_connection: "Direct Connection",
+    feature_direct_connection_desc: "We connect you directly with the institutions you need, without intermediaries or unnecessary waiting.",
+    // Services section
+    services_title_1: "How can we",
+    services_title_2: "help you today?",
+    services_description: "We know that each person has unique needs. That's why we have organized our services thinking about what really matters in your daily life.",
     users_title: "Users",
     users_new: "New user",
     // Home page news and stats
@@ -458,6 +498,26 @@ const dicts: Record<Locale, Dict> = {
     cat_education: "التعليم",
     cat_legal: "القانوني",
     cat_language: "اللغة",
+    // Hero section
+    hero_title_1: "بيتك الجديد في",
+    hero_title_2: "الباسك ينتظرك",
+    hero_description_1: "أكثر من مجرد معلومات، نحن الجسر إلى حياتك الجديدة.",
+    hero_description_2: "كل خطوة مهمة، كل قصة مهمة، أنت مهم.",
+    // Community section
+    community_title_1: "أكثر من خدمات،",
+    community_title_2: "نحن مجتمع",
+    community_description: "كل شخص يصل يحمل معه قصصاً وأحلاماً وآمالاً. نحن هنا لجعل هذه الرحلة أسهل وأكثر إنسانية.",
+    // Features
+    feature_clear_info: "معلومات واضحة",
+    feature_clear_info_desc: "لا توجد تفاصيل مخفية، ولا تعقيدات. كل شيء مشروح ببساطة حتى تتمكن من الفهم والعمل.",
+    feature_welcoming_community: "مجتمع مرحب",
+    feature_welcoming_community_desc: "مساحة حيث كل قصة مهمة. هنا ستجد الدعم والفهم والأشخاص الذين مروا بنفس التجربة.",
+    feature_direct_connection: "تواصل مباشر",
+    feature_direct_connection_desc: "نربطك مباشرة بالمؤسسات التي تحتاجها، بدون وسطاء أو انتظار غير ضروري.",
+    // Services section
+    services_title_1: "كيف يمكننا",
+    services_title_2: "مساعدتك اليوم؟",
+    services_description: "نعلم أن كل شخص له احتياجات فريدة. لهذا السبب نظمنا خدماتنا مع التفكير في ما يهم حقاً في حياتك اليومية.",
     users_title: "المستخدمون",
     users_new: "إضافة مستخدم",
     // Home page news and stats
@@ -664,6 +724,26 @@ const dicts: Record<Locale, Dict> = {
     cat_education: "Hezkuntza",
     cat_legal: "Legezkoa",
     cat_language: "Hizkuntza",
+    // Hero section
+    hero_title_1: "Zure etxe berria hemen",
+    hero_title_2: "Euskadik zain zaitu",
+    hero_description_1: "Informazio baino gehiago, zure bizitza berrirako zubia gara.",
+    hero_description_2: "Urrats bakoitza garrantzitsua da, istorio bakoitza garrantzitsua da, zu garrantzitsua zara.",
+    // Community section
+    community_title_1: "Zerbitzuak baino gehiago,",
+    community_title_2: "komunitatea gara",
+    community_description: "Heltzen den pertsona bakoitzak istorioak, ametsak eta itxaropenak dakartzа berarekin. Hemen gaude bidaia hori errazago eta gizatiarragoa izan dadin.",
+    // Features
+    feature_clear_info: "Informazio Argia",
+    feature_clear_info_desc: "Ez dago letra txikirik, ez konplikaziorik. Dena modu sinplean azalduta, ulertu eta jardun ahal izateko.",
+    feature_welcoming_community: "Komunitate Hartekorra",
+    feature_welcoming_community_desc: "Istorio bakoitza garrantzitsua den espazioa. Hemen laguntza, ulertze eta gauza bera bizi izan dutenen babesa aurkituko dituzu.",
+    feature_direct_connection: "Konexio Zuzena",
+    feature_direct_connection_desc: "Behar dituzun erakundeekin zuzenean konektatzen zaitugu, bitartekorik edo itxaron beharrik gabe.",
+    // Services section
+    services_title_1: "Nola lagun",
+    services_title_2: "dezakegu gaur?",
+    services_description: "Badakigu pertsona bakoitzak behar berezirik dituela. Horregatik antolatu ditugu gure zerbitzuak zure eguneroko bizitzan benetan garrantzitsuak diren gauzak kontuan hartuta.",
     users_title: "Erabiltzaileak",
     users_new: "Erabiltzaile berria",
     // Home page news and stats
