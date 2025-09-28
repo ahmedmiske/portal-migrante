@@ -41,6 +41,10 @@ const dicts: Record<Locale, Dict> = {
     f_language: "Idioma",
     users_title: "Usuarios",
     users_new: "Añadir usuario",
+    // Human homepage messages
+    warm_welcome: "¡Hola! Te damos la bienvenida",
+    human_search: "¿En qué podemos ayudarte hoy? Busca aquí...",
+    community_welcome: "Te estábamos esperando",
     // Home page news and stats
     home_news_title: "Últimas Noticias y Actualizaciones",
     home_view_all: "Ver todas",
@@ -240,6 +244,10 @@ const dicts: Record<Locale, Dict> = {
     f_language: "Language",
     users_title: "Users",
     users_new: "New user",
+    // Human homepage messages
+    warm_welcome: "Hello! We welcome you",
+    human_search: "How can we help you today? Search here...",
+    community_welcome: "We were waiting for you",
     // Home page news and stats
     home_news_title: "Latest News and Updates",
     home_view_all: "View all",
@@ -439,6 +447,10 @@ const dicts: Record<Locale, Dict> = {
     f_language: "اللغة",
     users_title: "المستخدمون",
     users_new: "إضافة مستخدم",
+    // Human homepage messages
+    warm_welcome: "مرحباً! نرحب بك",
+    human_search: "كيف يمكننا مساعدتك اليوم؟ ابحث هنا...",
+    community_welcome: "كنا ننتظرك",
     // Home page news and stats
     home_news_title: "آخر الأخبار والتحديثات",
     home_view_all: "عرض الكل",
@@ -638,6 +650,10 @@ const dicts: Record<Locale, Dict> = {
     f_language: "Hizkuntza",
     users_title: "Erabiltzaileak",
     users_new: "Erabiltzaile berria",
+    // Human homepage messages
+    warm_welcome: "Kaixo! Ongi etorri",
+    human_search: "Nola lagun dezakegu gaur? Bilatu hemen...",
+    community_welcome: "Zure zain geunden",
     // Home page news and stats
     home_news_title: "Azken Berriak eta Eguneraketak",
     home_view_all: "Denak ikusi",
