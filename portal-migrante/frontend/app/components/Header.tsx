@@ -136,10 +136,10 @@ export default function Header() {
             <LanguageSwitcher />
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button - Desktop - تم تصغيره إلى px-4 py-2 text-xs */}
           <Link 
             to="/users/new" 
-            className="group relative inline-flex items-center gap-2 bg-vitoria-gradient text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
+            className="group relative inline-flex items-center gap-2 bg-vitoria-gradient text-white px-4 py-2 rounded-xl font-semibold text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
           >
             <svg className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -210,11 +210,11 @@ export default function Header() {
                 </NavLink>
               ))}
               
-              {/* Mobile CTA */}
+              {/* Mobile CTA - تم تصغيره إلى py-3 */}
               <div className="pt-4 border-t border-gray-200/50 mt-2">
                 <Link
                   to="/users/new"
-                  className="group flex items-center justify-center gap-2 bg-vitoria-gradient text-white px-6 py-4 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="group flex items-center justify-center gap-2 bg-vitoria-gradient text-white !px-4 !py-2 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300"
                   onClick={() => setOpen(false)}
                 >
                   <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

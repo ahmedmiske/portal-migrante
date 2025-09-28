@@ -1,5 +1,4 @@
-// frontend/app/routes/home.tsx
-import { Link, useNavigate } from "react-router-dom";
+﻿import { Link, useNavigate } from "react-router-dom";
 import { useI18n } from "../i18n";
 import { useState } from "react";
 
@@ -9,299 +8,276 @@ export default function Home() {
   const navigate = useNavigate();
 
   const categories = [
-    { key: "salud",  title: t("cat_health") || "Salud",       icon: "❤️", to: "/servicios?c=salud" },
+    { key: "salud", title: t("cat_health") || "Salud", icon: "❤️", to: "/servicios?c=salud" },
     { key: "vivienda", title: t("cat_housing") || "Vivienda", icon: "🏠", to: "/servicios?c=vivienda" },
-    { key: "empleo", title: t("cat_jobs") || "Empleo",         icon: "💼", to: "/servicios?c=empleo" },
+    { key: "empleo", title: t("cat_jobs") || "Empleo", icon: "💼", to: "/servicios?c=empleo" },
     { key: "educacion", title: t("cat_education") || "Educación", icon: "🎓", to: "/servicios?c=educacion" },
-    { key: "legal",  title: t("cat_legal") || "Legal",         icon: "⚖️", to: "/servicios?c=legal" },
-    { key: "idioma", title: t("cat_language") || "Idioma",     icon: "🗣️", to: "/servicios?c=idioma" },
+    { key: "legal", title: t("cat_legal") || "Legal", icon: "⚖️", to: "/servicios?c=legal" },
+    { key: "idioma", title: t("cat_language") || "Idioma", icon: "🗣️", to: "/servicios?c=idioma" }
   ];
 
-  function onSearch(e: React.FormEvent) {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!q.trim()) return;
-    // يمكنك توجيه البحث لصفحة observatorio/servicios حسب تصميمك
     navigate(`/servicios?search=${encodeURIComponent(q.trim())}`);
-  }
+  };
 
   return (
-    <div className="min-h-[calc(100dvh-5rem)]">
-      {/* HERO */}
-      <section className="bg-vitoria-gradient text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-              {t("welcome_title") || "Plataforma para Inmigrantes en Euskadi"}
-            </h1>
-            <p className="mt-4 text-white/90 text-base sm:text-lg">
-              {t("welcome_body") ||
-                "Información clara, servicios verificados y apoyo comunitario para tu integración en el País Vasco."}
+    <main>
+      <section className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-green-800 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-600/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="absolute top-16 right-8 hidden lg:block">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20 max-w-xs">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                <span className="text-white">✓</span>
+              </div>
+              <span className="text-white font-medium text-sm">Historia de éxito</span>
+            </div>
+            <p className="text-white/90 text-sm">
+              "Encontré trabajo en 2 semanas gracias a esta plataforma"
             </p>
+            <p className="text-white/70 text-xs mt-1">- María, desde Honduras</p>
+          </div>
+        </div>
 
-            {/* Search bar */}
-            <form onSubmit={onSearch} className="mt-6 flex gap-2">
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                className="w-full sm:w-[420px] rounded-xl px-4 py-3 text-vitoria-black placeholder-white/70
-                           focus:outline-none focus:ring-2 focus:ring-white/60"
-                placeholder={t("search_placeholder") || "Busca trámites, salud, vivienda…"}
-                aria-label={t("search_placeholder") || "Buscar"}
-              />
-              <button
-                className="rounded-xl px-5 py-3 bg-vitoria-white text-vitoria-black font-semibold
-                           hover:opacity-90 transition"
-                type="submit"
-              >
-                {t("search") || "Buscar"}
-              </button>
-            </form>
+        <div className="absolute bottom-32 left-8 hidden lg:block">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="text-2xl">🏠</div>
+              <div>
+                <p className="text-white font-medium text-sm">Vivienda encontrada</p>
+                <p className="text-white/70 text-xs">En menos de 1 mes</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            {/* Quick actions */}
-            <div className="mt-4 flex flex-wrap gap-2 text-sm">
-              <Link to="/servicios" className="underline underline-offset-4">
-                {t("cta_services") || "Ver servicios"}
-              </Link>
-              <span aria-hidden className="opacity-60">·</span>
-              <Link to="/observatorio" className="underline underline-offset-4">
-                {t("nav_observatory") || "Observatorio"}
-              </Link>
-              <span aria-hidden className="opacity-60">·</span>
-              <Link to="/anuncios" className="underline underline-offset-4">
-                {t("nav_ads") || "Anuncios"}
-              </Link>
+        <div className="absolute top-1/2 right-16 hidden xl:block transform -translate-y-1/2">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 text-center">
+            <div className="text-3xl font-bold text-white mb-1">94%</div>
+            <p className="text-white/80 text-sm">Satisfacción</p>
+            <p className="text-white/60 text-xs">+2,500 usuarios</p>
+          </div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 min-h-screen flex items-center">
+          <div className="w-full">
+            <div className="text-center max-w-5xl mx-auto">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
+                <span className="block">Tu nuevo hogar en</span>
+                <span className="block bg-gradient-to-r from-green-300 via-blue-300 to-green-300 bg-clip-text text-transparent">
+                  Euskadi te espera
+                </span>
+              </h1>
+              
+              <p className="text-xl sm:text-2xl text-blue-100 mb-12 max-w-4xl mx-auto leading-relaxed">
+                Más que información, somos el puente hacia tu nueva vida. 
+                <span className="block mt-2 text-green-200">
+                  Cada paso importa, cada historia importa, tú importas.
+                </span>
+              </p>
+
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-3 border border-white/20">
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-white/90">Personas reales, ayuda real, resultados reales</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <Link
+                  to="/servicios"
+                  className="inline-flex items-center gap-3 bg-white text-blue-900 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all transform hover:scale-105 shadow-2xl"
+                >
+                  Comenzar ahora
+                </Link>
+                
+                <Link
+                  to="/sobre"
+                  className="inline-flex items-center gap-3 border-2 border-white/50 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white/10 hover:border-white transition-all backdrop-blur-sm"
+                >
+                  Conoce más
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CATEGORIES GRID */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <h2 className="text-2xl sm:text-3xl font-bold text-vitoria-black">
-          {t("home_categories_title") || "Categorías de servicios"}
-        </h2>
-        <p className="text-vitoria-gray mt-2">
-          {t("home_categories_sub") || "Recursos verificados por municipio y territorio histórico."}
-        </p>
-
-        <div className="mt-6 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((c) => (
-            <Link
-              key={c.key}
-              to={c.to}
-              className="group rounded-2xl border border-gray-200 bg-neutral-surface p-5 sm:p-6
-                         hover:shadow-lg hover:border-transparent transition relative overflow-hidden"
-            >
-              <div className="absolute -right-10 -top-10 w-28 h-28 rounded-full bg-vitoria-green/10 group-hover:bg-vitoria-green/20 transition" />
-              <div className="flex items-center justify-between">
-                <div className="text-3xl sm:text-4xl" aria-hidden>{c.icon}</div>
-                <span className="text-xs px-2 py-1 rounded-full bg-vitoria-green/10 text-vitoria-green">
-                  {t("home_categories_badge") || "Acceso rápido"}
-                </span>
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-vitoria-black">{c.title}</h3>
-              <p className="mt-1 text-sm text-vitoria-gray">
-                {t("home_category_hint") || "Guías, trámites, contactos y ayudas disponibles."}
-              </p>
-              <div className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-vitoria-green">
-                {t("home_view") || "Ver"}
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition" viewBox="0 0 24 24" fill="none">
-                  <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* STATS / BENEFITS */}
-      <section className="bg-neutral-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <Stat
-              title={t("benefit_info") || "Información clara"}
-              desc={t("benefit_info_desc") || "Todo en un solo lugar, sin barreras burocráticas."}
-            />
-            <Stat
-              title={t("benefit_community") || "Comunidad"}
-              desc={t("benefit_community_desc") || "Espacio seguro de apoyo y participación."}
-            />
-            <Stat
-              title={t("benefit_institutions") || "Instituciones"}
-              desc={t("benefit_institutions_desc") || "Datos para planificar políticas públicas."}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* NEWS & UPDATES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-vitoria-black">
-            {t("home_news_title") || "Últimas Noticias y Actualizaciones"}
-          </h2>
-          <Link 
-            to="/anuncios" 
-            className="text-vitoria-green font-semibold hover:underline"
-          >
-            {t("home_view_all") || "Ver todas"}
-          </Link>
-        </div>
-        
-        <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          <NewsCard
-            title={t("news_1_title") || "Nuevas ayudas para vivienda en 2024"}
-            summary={t("news_1_summary") || "El Gobierno Vasco anuncia nuevas subvenciones para el alquiler dirigidas a personas migrantes."}
-            date={t("news_1_date") || "25 Sep 2024"}
-            category={t("news_housing") || "Vivienda"}
-            icon="🏠"
-          />
-          <NewsCard
-            title={t("news_2_title") || "Programa de integración laboral ampliado"}
-            summary={t("news_2_summary") || "Se amplían los cursos de formación profesional con traducción a múltiples idiomas."}
-            date={t("news_2_date") || "22 Sep 2024"}
-            category={t("news_employment") || "Empleo"}
-            icon="💼"
-          />
-          <NewsCard
-            title={t("news_3_title") || "Nueva oficina de atención en Donostia"}
-            summary={t("news_3_summary") || "Apertura de un nuevo centro de información y trámites específico para migrantes."}
-            date={t("news_3_date") || "20 Sep 2024"}
-            category={t("news_services") || "Servicios"}
-            icon="🏢"
-          />
-        </div>
-      </section>
-
-      {/* QUICK STATS FROM OBSERVATORY */}
-      <section className="bg-gradient-to-r from-blue-50 to-green-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-          <h2 className="text-2xl sm:text-3xl font-bold text-vitoria-black text-center mb-8">
-            {t("home_stats_title") || "Impacto del Portal Migrante"}
-          </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <QuickStat
-              icon="👥"
-              number="15,847"
-              label={t("stats_users") || "Usuarios registrados"}
-            />
-            <QuickStat
-              icon="📋"
-              number="2,345"
-              label={t("stats_services") || "Servicios consultados"}
-            />
-            <QuickStat
-              icon="🌍"
-              number="47"
-              label={t("stats_countries") || "Países de origen"}
-            />
-            <QuickStat
-              icon="📊"
-              number="89%"
-              label={t("stats_satisfaction") || "Satisfacción de usuarios"}
-            />
-          </div>
-          
-          <div className="text-center mt-8">
-            <Link
-              to="/observatorio"
-              className="inline-flex items-center gap-2 text-vitoria-green font-semibold hover:underline"
-            >
-              {t("home_view_observatory") || "Ver más estadísticas en el Observatorio"}
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CALL TO ACTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="rounded-3xl p-8 sm:p-10 bg-vitoria-green text-vitoria-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
-            <h3 className="text-2xl sm:text-3xl font-bold">
-              {t("home_cta_title") || "¿Quieres participar o colaborar?"}
-            </h3>
-            <p className="mt-2 text-white/90">
-              {t("home_cta_sub") || "Únete a la comunidad, comparte recursos y mejora la integración en Euskadi."}
+      <section className="bg-gradient-to-b from-gray-50 to-white py-20 sm:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              <span className="block">En qué podemos</span>
+              <span className="block bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+                ayudarte hoy?
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Sabemos que cada persona tiene necesidades únicas. Por eso hemos organizado nuestros servicios pensando en lo que realmente importa en tu día a día.
             </p>
           </div>
-          <div className="flex gap-3">
-            <Link
-              to="/users/new"
-              className="rounded-xl bg-white text-vitoria-black font-semibold px-5 py-3 hover:opacity-90 transition"
-            >
-              {t("users_new") || "Crear cuenta"}
-            </Link>
-            <Link
-              to="/contacto"
-              className="rounded-xl border border-white/70 text-white font-semibold px-5 py-3 hover:bg-white/10 transition"
-            >
-              {t("nav_contact") || "Contacto"}
-            </Link>
+
+          <div className="grid gap-8 sm:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {categories.map((c) => (
+              <Link
+                key={c.key}
+                to={c.to}
+                className="group relative"
+              >
+                <div className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-2 border border-gray-100 group-hover:border-blue-200/50">
+                  
+                  <div className="relative mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-2xl text-white">{c.icon}</span>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                    {c.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Te acompañamos paso a paso con información clara, contactos directos y recursos verificados.
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-2 text-blue-600 font-medium group-hover:text-blue-700">
+                      Explorar servicios
+                    </span>
+                    <div className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium">
+                      Disponible
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
-    </div>
-  );
-}
 
-/* ---------- Mini stat card ---------- */
-function Stat({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6">
-      <div className="text-vitoria-green font-semibold">{title}</div>
-      <p className="mt-1 text-sm text-vitoria-gray">{desc}</p>
-    </div>
-  );
-}
+      <section className="bg-gradient-to-b from-blue-50 to-green-50 py-20 sm:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              <span className="block">Más que servicios,</span>
+              <span className="block bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+                somos comunidad
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Cada persona que llega trae consigo historias, sueños y esperanzas. 
+              Estamos aquí para que ese camino sea más fácil y humano.
+            </p>
+          </div>
 
-/* ---------- News Card ---------- */
-function NewsCard({ 
-  title, 
-  summary, 
-  date, 
-  category, 
-  icon 
-}: { 
-  title: string; 
-  summary: string; 
-  date: string; 
-  category: string; 
-  icon: string; 
-}) {
-  return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 hover:shadow-lg transition">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="text-2xl" aria-hidden>{icon}</span>
-        <span className="text-xs px-2 py-1 rounded-full bg-vitoria-green/10 text-vitoria-green font-medium">
-          {category}
-        </span>
-      </div>
-      <h3 className="font-semibold text-vitoria-black mb-2 line-clamp-2">{title}</h3>
-      <p className="text-sm text-vitoria-gray mb-3 line-clamp-3">{summary}</p>
-      <div className="text-xs text-vitoria-gray">{date}</div>
-    </div>
-  );
-}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 text-center group hover:bg-white transition-all duration-300 shadow-lg hover:shadow-2xl">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Información Clara
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                Sin letra pequeña, sin complicaciones. Todo explicado de forma sencilla para que puedas entender y actuar.
+              </p>
+            </div>
 
-/* ---------- Quick Stat ---------- */
-function QuickStat({
-  icon,
-  number,
-  label
-}: {
-  icon: string;
-  number: string;
-  label: string;
-}) {
-  return (
-    <div className="text-center">
-      <div className="text-3xl mb-2" aria-hidden>{icon}</div>
-      <div className="text-2xl sm:text-3xl font-bold text-vitoria-black mb-1">{number}</div>
-      <div className="text-sm text-vitoria-gray">{label}</div>
-    </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 text-center group hover:bg-white transition-all duration-300 shadow-lg hover:shadow-2xl">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span className="text-2xl">🤝</span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Comunidad Acogedora
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                Un espacio donde cada historia importa. Aquí encontrarás apoyo, comprensión y personas que han pasado por lo mismo.
+              </p>
+            </div>
+
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 text-center group hover:bg-white transition-all duration-300 shadow-lg hover:shadow-2xl">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span className="text-2xl">🏢</span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Conexión Directa
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                Te conectamos directamente con las instituciones que necesitas, sin intermediarios ni esperas innecesarias.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <div className="inline-flex items-center gap-4 bg-white/90 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg">
+              <div className="flex -space-x-2">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full border-2 border-white"></div>
+                <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-green-500 rounded-full border-2 border-white"></div>
+                <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full border-2 border-white"></div>
+                <div className="w-10 h-10 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full border-2 border-white flex items-center justify-center">
+                  <span className="text-white text-sm font-bold">+</span>
+                </div>
+              </div>
+              <div className="text-left">
+                <p className="text-gray-900 font-semibold">Miles de personas ya confían en nosotros</p>
+                <p className="text-gray-600 text-sm">Y tú también puedes formar parte de esta comunidad</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-r from-blue-900 via-blue-800 to-green-800 py-20 sm:py-28">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8">
+            <span className="block">Listo para dar</span>
+            <span className="block text-green-300">el siguiente paso?</span>
+          </h2>
+          <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
+            No tienes que hacer este camino solo. Estamos aquí para acompañarte, 
+            paso a paso, con toda la información y apoyo que necesitas.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Link
+              to="/servicios"
+              className="inline-flex items-center gap-3 bg-white text-blue-900 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg"
+            >
+              🔍 Explorar servicios
+            </Link>
+            
+            <Link
+              to="/contacto"
+              className="inline-flex items-center gap-3 border-2 border-white text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white hover:text-blue-900 transition-all"
+            >
+              💬 Hablar con nosotros
+            </Link>
+          </div>
+          
+          <div className="mt-12 flex items-center justify-center gap-8 text-blue-200">
+            <div className="flex items-center gap-2">
+              <span className="text-green-400">✓</span>
+              <span>Gratuito</span>
+            </div>
+            <div className="flex items-center gap-2">  
+              <span className="text-green-400">✓</span>
+              <span>Confidencial</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-400">✓</span>
+              <span>En tu idioma</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
