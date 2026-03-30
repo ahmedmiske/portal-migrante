@@ -1,10 +1,16 @@
-// backend/src/routes/users.route.ts
+// src/routes/users.route.ts
 import { Router } from "express";
-import { createUser, getUsers } from "../controllers/user.controller";
+import {
+  createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "../controllers/user.controller";
 
 const router = Router();
 
-router.post("/", createUser);
-router.get("/", getUsers);
+router.route("/").get(getUsers).post(createUser);
+router.route("/:id").get(getUserById).put(updateUser).delete(deleteUser);
 
 export default router;

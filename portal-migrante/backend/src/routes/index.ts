@@ -1,12 +1,16 @@
 import { Router } from "express";
-import healthRouter from "./health.route";
-import servicesRouter from "./services.route";
-import usersRouter from "./users.route";
+import healthRoute from "./health.route";
+import usersRoute from "./users.route";
+import servicesRoute from "./services.route";
+import organizationsRoute from "./organizations.route";
+import municipalitiesRoute from "./municipalities.route";
 
 const router = Router();
 
-router.use("/health", healthRouter);
-router.use("/services", servicesRouter);
-router.use("/users", usersRouter);
+router.use("/health", healthRoute);
+router.use("/users", usersRoute);
+router.use("/services", servicesRoute);
+router.use("/organizations", organizationsRoute);
+router.use("/municipalities", municipalitiesRoute);
 
 export default router;

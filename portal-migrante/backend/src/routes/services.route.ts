@@ -1,12 +1,16 @@
+// src/routes/services.route.ts
 import { Router } from "express";
-import { listServices, createService } from "../controllers/services.controller";
+import {
+  createService,
+  getServices,
+  getServiceById,
+  updateService,
+  deleteService,
+} from "../controllers/services.controller";
 
 const router = Router();
 
-// GET /api/services?category=salud
-router.get("/", listServices);
-
-// POST /api/services   (تجريبية للتطوير)
-router.post("/", createService);
+router.route("/").get(getServices).post(createService);
+router.route("/:id").get(getServiceById).put(updateService).delete(deleteService);
 
 export default router;

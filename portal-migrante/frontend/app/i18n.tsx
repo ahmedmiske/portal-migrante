@@ -919,6 +919,26 @@ const dicts: Record<Locale, Dict> = {
     ad_medical_interpreter_desc: "Mediku hizketa eta osasun tramiteentzako interpretazio zerbitzua.",
     ad_community_event: "Komunitate gertaera kultura arteko",
     ad_community_event_desc: "Kultura anitzeko ospakizuna janaria, musika eta familia osorako jarduerak.",
+
+    // مثال مفاتيح
+ay_title: "Ayuntamientos",
+ay_subtitle: "Direcciones y contactos oficiales por territorio histórico.",
+ay_filter_all: "Todos",
+ay_search: "Buscar municipio...",
+ay_results: "resultados",
+ay_official_site: "Sitio oficial",
+ay_no_site: "Sin enlace",
+ay_no_address: "Dirección no disponible",
+ay_empty: "No hay resultados para este filtro/búsqueda.",
+f_municipalities: "Ayuntamientos",
+ay_badge: "Directorio municipal",
+ay_reset: "Reset",
+ay_loading: "Cargando…",
+ay_loading_msg: "Cargando lista de municipios…",
+ay_error: "Error al cargar datos",
+ay_error_hint: "Verifica que exista /public/data/ayuntamientos-euskadi.json",
+
+
   },
 };
 

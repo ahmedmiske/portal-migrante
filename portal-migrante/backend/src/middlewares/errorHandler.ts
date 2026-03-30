@@ -1,10 +1,23 @@
-import { NextFunction, Request, Response } from "express";
+// src/middlewares/errorHandler.ts
+import { Request, Response, NextFunction } from "express";
 
-export default function errorHandler(err: any, _req: Request, res: Response, _next: NextFunction) {
-  const status = err?.status || 500;
-  const message = err?.message || "Internal Server Error";
-  if (process.env.NODE_ENV !== "production") {
-    console.error("❌", err);
-  }
-  res.status(status).json({ ok: false, error: message });
+interface CustomError extends Error {
+  statusCode?: number;
 }
+
+const errorHandler = (
+  err: CustomError,
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+): void => {
+  const statusCode =
+    res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
+
+  res.status(statusCode).json({
+    message: err.message || "Server Error",
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+  });
+};
+
+export default errorHandler;

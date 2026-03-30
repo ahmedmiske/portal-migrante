@@ -8,6 +8,9 @@ import Contacto from "./routes/contacto";
 import Sobre from "./routes/sobre";
 import Anuncios from "./routes/anuncios";
 import Observatorio from "./routes/observatorio";
+import AyuntamientosPage from "./routes/ayuntamientos";
+import OrganizationsPage from "./routes/organizations";
+import NewOrganizationPage from "./routes/organizations.new";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +24,10 @@ const router = createBrowserRouter([
       { path: "sobre", element: <Sobre /> },
       { path: "contacto", element: <Contacto /> },
       { path: "users", element: <Users /> },
-      { path: "users/new", element: <NewUser /> }
+      { path: "users/new", element: <NewUser /> },
+      { path: "organizations", element: <OrganizationsPage /> },
+      { path: "organizations/new", element: <NewOrganizationPage /> },
+      { path: "ayuntamientos", element: <AyuntamientosPage /> },
     ],
   },
 ]);

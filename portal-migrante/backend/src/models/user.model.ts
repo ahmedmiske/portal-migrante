@@ -1,17 +1,102 @@
-import mongoose, { Schema, Document } from "mongoose";
+// src/models/user.model.ts
+import mongoose, { Schema, Document, Model, Types } from "mongoose";
 
 export interface IUser extends Document {
-  name: string;
+  accountType: "individual" | "organization_account";
+  role:
+    | "community_user"
+    | "organization_manager"
+    | "admin"
+    | "super_admin";
+  fullName: string;
+  displayName?: string;
   email: string;
-  password: string;
+  phone?: string;
+  passwordHash?: string;
+  preferredLanguage?: string;
+  profileImage?: string;
+  organizationId?: Types.ObjectId | null;
+  status: "active" | "inactive" | "pending" | "blocked";
+  isVerified: boolean;
   createdAt: Date;
+  updatedAt: Date;
 }
 
-const userSchema = new Schema<IUser>({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
-});
+const userSchema = new Schema<IUser>(
+  {
+    accountType: {
+      type: String,
+      enum: ["individual", "organization_account"],
+      default: "individual",
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: [
+        "community_user",
+        "organization_manager",
+        "admin",
+        "super_admin",
+      ],
+      default: "community_user",
+      required: true,
+    },
+    fullName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    displayName: {
+      type: String,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
+    phone: {
+      type: String,
+      trim: true,
+    },
+    passwordHash: {
+      type: String,
+      trim: true,
+      select: false,
+    },
+    preferredLanguage: {
+      type: String,
+      trim: true,
+      default: "es",
+    },
+    profileImage: {
+      type: String,
+      trim: true,
+    },
+    organizationId: {
+      type: Schema.Types.ObjectId,
+      ref: "Organization",
+      default: null,
+    },
+    status: {
+      type: String,
+      enum: ["active", "inactive", "pending", "blocked"],
+      default: "active",
+      required: true,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export default mongoose.model<IUser>("User", userSchema);
+const User: Model<IUser> = mongoose.model<IUser>("User", userSchema);
+
+export default User;

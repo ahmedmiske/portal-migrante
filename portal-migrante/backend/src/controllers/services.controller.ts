@@ -2,40 +2,83 @@
 import { Request, Response } from "express";
 import Service from "../models/service.model";
 
-// GET /api/services?category=salud&municipality=Bilbao
-export async function listServices(req: Request, res: Response) {
-  const { category, municipality } = req.query as {
-    category?: string;
-    municipality?: string;
-  };
-
-  const filter: any = {};
-  if (category) filter.category = category;
-  if (municipality) filter.municipality = municipality;
-
-  const items = await Service.find(filter)
-    .sort({ createdAt: -1 })
-    .limit(500);
-
-  res.json({ count: items.length, items });
-}
-
-// POST /api/services
-export async function createService(req: Request, res: Response) {
-  const { title, category, municipality, url, phone, lang } = req.body;
-
-  if (!title || !category) {
-    return res.status(400).json({ ok: false, error: "title and category are required" });
+export const createService = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const service = await Service.create(req.body);
+    res.status(201).json(service);
+  } catch (error: any) {
+    res.status(400).json({
+      message: "Failed to create service",
+      error: error.message,
+    });
   }
+};
 
-  const created = await Service.create({
-    title,
-    category,
-    municipality,
-    url,
-    phone,
-    lang,
-  });
+export const getServices = async (_req: Request, res: Response): Promise<void> => {
+  try {
+    const services = await Service.find().sort({ createdAt: -1 });
+    res.status(200).json(services);
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Failed to fetch services",
+      error: error.message,
+    });
+  }
+};
 
-  res.status(201).json(created);
-}
+export const getServiceById = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const service = await Service.findById(req.params.id);
+
+    if (!service) {
+      res.status(404).json({ message: "Service not found" });
+      return;
+    }
+
+    res.status(200).json(service);
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Failed to fetch service",
+      error: error.message,
+    });
+  }
+};
+
+export const updateService = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const service = await Service.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!service) {
+      res.status(404).json({ message: "Service not found" });
+      return;
+    }
+
+    res.status(200).json(service);
+  } catch (error: any) {
+    res.status(400).json({
+      message: "Failed to update service",
+      error: error.message,
+    });
+  }
+};
+
+export const deleteService = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const service = await Service.findByIdAndDelete(req.params.id);
+
+    if (!service) {
+      res.status(404).json({ message: "Service not found" });
+      return;
+    }
+
+    res.status(200).json({ message: "Service deleted successfully" });
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Failed to delete service",
+      error: error.message,
+    });
+  }
+};
