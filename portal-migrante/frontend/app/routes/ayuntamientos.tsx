@@ -55,6 +55,19 @@ export default function AyuntamientosPage() {
     }
   };
 
+  const territoryBadgeClass = (value?: string) => {
+    switch (value) {
+      case "alava":
+        return "bg-success-subtle text-success";
+      case "bizkaia":
+        return "bg-primary-subtle text-primary";
+      case "gipuzkoa":
+        return "bg-warning-subtle text-warning-emphasis";
+      default:
+        return "bg-secondary-subtle text-secondary";
+    }
+  };
+
   if (loading) {
     return (
       <div className="container py-4">
@@ -78,24 +91,24 @@ export default function AyuntamientosPage() {
       <div className="mb-4">
         <h1 className="h3 fw-bold mb-2">Ayuntamientos de Euskadi</h1>
         <p className="text-secondary mb-0">
-          Consulta los datos principales de contacto de los ayuntamientos del País Vasco.
+          Encuentra información básica de contacto de los ayuntamientos del País Vasco.
         </p>
       </div>
 
       <div className="row g-3 mb-4">
-        <div className="col-12 col-md-8">
+        <div className="col-12 col-lg-8">
           <input
             type="text"
-            className="form-control"
+            className="form-control form-control-lg border-0 shadow-sm"
             placeholder="Buscar ayuntamiento, municipio o dirección..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
 
-        <div className="col-12 col-md-4">
+        <div className="col-12 col-lg-4">
           <select
-            className="form-select"
+            className="form-select form-select-lg border-0 shadow-sm"
             value={territory}
             onChange={(e) => setTerritory(e.target.value)}
           >
@@ -107,119 +120,130 @@ export default function AyuntamientosPage() {
         </div>
       </div>
 
-      <div className="mb-3 text-secondary">
-        {filteredItems.length} ayuntamiento{filteredItems.length !== 1 ? "s" : ""} encontrado
-        {filteredItems.length !== 1 ? "s" : ""}
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <div className="text-secondary small">
+          {filteredItems.length} resultado{filteredItems.length !== 1 ? "s" : ""}
+        </div>
       </div>
 
-      <div className="row g-4">
-        {filteredItems.length === 0 ? (
-          <div className="col-12">
-            <div className="alert alert-light border mb-0" role="alert">
-              No se encontraron resultados con los filtros actuales.
-            </div>
-          </div>
-        ) : (
-          filteredItems.map((item) => (
-            <div key={item._id} className="col-12">
-              <div className="card border-0 shadow-sm h-100">
-                <div className="card-body p-4">
-                  <div className="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3 mb-3">
-                    <div>
-                      <h2 className="h4 fw-bold mb-1">{item.name || "Ayuntamiento"}</h2>
+      {filteredItems.length === 0 ? (
+        <div className="alert alert-light border shadow-sm" role="alert">
+          No se encontraron ayuntamientos con los filtros actuales.
+        </div>
+      ) : (
+        <div className="row g-4">
+          {filteredItems.map((item) => (
+            <div key={item._id} className="col-12 col-md-6 col-xl-4">
+              <div
+                className="card border-0 shadow-sm h-100"
+                style={{
+                  borderRadius: "18px",
+                  overflow: "hidden",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                }}
+              >
+                <div
+                  className="card-body p-4 d-flex flex-column"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+                  }}
+                >
+                  <div className="d-flex justify-content-between align-items-start mb-3">
+                    <div className="pe-2">
+                      <h2 className="h5 fw-bold mb-1 text-dark">
+                        {item.name || "Ayuntamiento"}
+                      </h2>
                       {item.municipio && (
-                        <div className="text-secondary">{item.municipio}</div>
+                        <div className="text-secondary small">{item.municipio}</div>
                       )}
                     </div>
 
-                    <span className="badge text-bg-success px-3 py-2">
+                    <span
+                      className={`badge rounded-pill px-3 py-2 fw-semibold ${territoryBadgeClass(
+                        item.territory
+                      )}`}
+                    >
                       {territoryLabel(item.territory)}
                     </span>
                   </div>
 
-                  <div className="row g-3">
+                  <div className="d-flex flex-column gap-2 small">
                     {item.address && (
-                      <div className="col-12 col-md-6">
-                        <div className="small text-uppercase text-secondary fw-semibold mb-1">
-                          Dirección
-                        </div>
-                        <div>{item.address}</div>
+                      <div className="d-flex align-items-start gap-2">
+                        <span className="text-success">📍</span>
+                        <span className="text-dark">{item.address}</span>
                       </div>
                     )}
 
                     {item.phone && (
-                      <div className="col-12 col-md-6">
-                        <div className="small text-uppercase text-secondary fw-semibold mb-1">
-                          Teléfono
-                        </div>
-                        <div>{item.phone}</div>
+                      <div className="d-flex align-items-start gap-2">
+                        <span className="text-success">📞</span>
+                        <span className="text-dark">{item.phone}</span>
                       </div>
                     )}
 
                     {item.email && (
-                      <div className="col-12 col-md-6">
-                        <div className="small text-uppercase text-secondary fw-semibold mb-1">
-                          Email
-                        </div>
-                        <div>
-                          <a href={`mailto:${item.email}`} className="text-decoration-none">
-                            {item.email}
-                          </a>
-                        </div>
+                      <div className="d-flex align-items-start gap-2">
+                        <span className="text-success">✉️</span>
+                        <a
+                          href={`mailto:${item.email}`}
+                          className="text-decoration-none text-dark"
+                        >
+                          {item.email}
+                        </a>
                       </div>
                     )}
 
                     {item.website && (
-                      <div className="col-12 col-md-6">
-                        <div className="small text-uppercase text-secondary fw-semibold mb-1">
-                          Web
-                        </div>
-                        <div>
-                          <a
-                            href={item.website}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-decoration-none"
-                          >
-                            {item.website}
-                          </a>
-                        </div>
+                      <div className="d-flex align-items-start gap-2">
+                        <span className="text-success">🌐</span>
+                        <a
+                          href={item.website}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-decoration-none text-primary"
+                        >
+                          Ver sitio web
+                        </a>
                       </div>
                     )}
+                  </div>
 
-                    {item.population !== undefined && item.population !== null && (
-                      <div className="col-12 col-md-6">
-                        <div className="small text-uppercase text-secondary fw-semibold mb-1">
-                          Población
+                  <div className="mt-4 pt-3 border-top">
+                    <div className="row g-2 small">
+                      {item.population !== undefined && item.population !== null && (
+                        <div className="col-6">
+                          <div className="text-secondary">Población</div>
+                          <div className="fw-semibold">
+                            {item.population.toLocaleString("es-ES")}
+                          </div>
                         </div>
-                        <div>{item.population.toLocaleString("es-ES")}</div>
-                      </div>
-                    )}
+                      )}
 
-                    {item.mayor && (
-                      <div className="col-12 col-md-6">
-                        <div className="small text-uppercase text-secondary fw-semibold mb-1">
-                          Alcaldía
+                      {item.party && (
+                        <div className="col-6">
+                          <div className="text-secondary">Partido</div>
+                          <div className="fw-semibold text-truncate">{item.party}</div>
                         </div>
-                        <div>{item.mayor}</div>
-                      </div>
-                    )}
+                      )}
+                    </div>
+                  </div>
 
-                    {item.party && (
-                      <div className="col-12 col-md-6">
-                        <div className="small text-uppercase text-secondary fw-semibold mb-1">
-                          Partido
-                        </div>
-                        <div>{item.party}</div>
-                      </div>
-                    )}
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="btn btn-success w-100 rounded-pill fw-semibold"
+                    >
+                      Ver detalles
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
