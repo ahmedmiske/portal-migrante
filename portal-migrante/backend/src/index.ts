@@ -24,6 +24,20 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    message: "Portal Migrante API is running",
+    status: "ok",
+  });
+});
+
+app.get("/api", (_req, res) => {
+  res.status(200).json({
+    message: "Portal Migrante API",
+    status: "ok",
+  });
+});
+
 app.use("/api", router);
 
 app.use(notFound);
