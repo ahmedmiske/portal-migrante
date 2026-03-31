@@ -231,7 +231,7 @@ export default function Header() {
       {/* Mobile menu backdrop */}
       {open && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          className="lg:hidden fixed inset-0 bg-black/20  z-40"
           onClick={() => setOpen(false)}
         />
       )}
