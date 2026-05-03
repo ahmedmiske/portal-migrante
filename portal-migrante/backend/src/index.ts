@@ -15,14 +15,40 @@ dotenv.config();
 const app = express();
 
 const PORT = Number(process.env.PORT) || 4000;
-const FRONTEND_URL =
-  process.env.FRONTEND_URL ||
-  process.env.CLIENT_URL ||
-  "http://localhost:5173";
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/portal";
+const defaultAllowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://portal-migrante-frontend.onrender.com",
+];
+const configuredAllowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.CLIENT_URL,
+  process.env.ALLOWED_ORIGINS,
+]
+  .filter(Boolean)
+  .flatMap((value) => String(value).split(","))
+  .map((value) => value.trim())
+  .filter(Boolean);
+const allowedOrigins = new Set([
+  ...defaultAllowedOrigins,
+  ...configuredAllowedOrigins,
+]);
 
 app.use(helmet());
-app.use(cors({ origin: FRONTEND_URL, credentials: true }));
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.has(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`CORS blocked origin: ${origin}`));
+    },
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true, limit: "5mb" }));
