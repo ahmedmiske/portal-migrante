@@ -253,21 +253,45 @@ export default function Header() {
       </nav>
 
       {/* Mobile menu */}
-      <div className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-        open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-      }`}>
-        <div className="bg-white/95 backdrop-blur-md border-t border-gray-200/50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-            <div className="flex flex-col gap-2">
+      <div
+        className={`lg:hidden overflow-hidden border-t border-gray-200 bg-white shadow-xl transition-all duration-300 ease-in-out ${
+          open ? "max-h-[calc(100vh-5rem)] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6">
+            <div className="mb-5 flex items-center justify-between rounded-lg border border-emerald-100 bg-emerald-50 p-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-vitoria-gradient text-white shadow-sm">
+                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657 13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-lg font-black text-vitoria-black">{t("portal_brand")}</div>
+                  <div className="text-xs font-bold text-vitoria-gray">{t("portal_region")}</div>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="rounded-lg border border-emerald-200 bg-white px-3 py-2 text-sm font-black text-vitoria-green shadow-sm"
+                onClick={() => setOpen(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="grid gap-2">
               {navItems.map((item, index) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    `group flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-base transition-all duration-300 ${
+                    `group flex items-center justify-between rounded-lg border px-4 py-4 text-base font-black transition-all duration-200 ${
                       isActive 
-                        ? "text-vitoria-green bg-vitoria-green/10 shadow-sm" 
-                        : "text-vitoria-gray hover:text-vitoria-green hover:bg-vitoria-green/5"
+                        ? "border-emerald-200 bg-emerald-50 text-vitoria-green shadow-sm" 
+                        : "border-gray-200 bg-white text-vitoria-gray hover:border-emerald-200 hover:bg-emerald-50 hover:text-vitoria-green"
                     }`
                   }
                   onClick={() => setOpen(false)}
@@ -276,14 +300,14 @@ export default function Header() {
                     animation: open ? 'slideInFromRight 0.3s ease-out forwards' : 'none'
                   }}
                 >
-                  <span className="opacity-70 group-hover:opacity-100 transition-opacity">
+                  <span>{item.label}</span>
+                  <span className="text-vitoria-gray transition-colors group-hover:text-vitoria-green">
                     {item.icon}
                   </span>
-                  {item.label}
                 </NavLink>
               ))}
               
-              <div className="pt-4 border-t border-gray-200/50 mt-2">
+              <div className="mt-3 border-t border-gray-200 pt-4">
                 {currentUser ? (
                   <div>{userSummary}</div>
                 ) : (
@@ -312,14 +336,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-
-      {/* Mobile menu backdrop */}
-      {open && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/20  z-40"
-          onClick={() => setOpen(false)}
-        />
-      )}
     </header>
   );
 }
