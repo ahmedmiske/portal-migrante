@@ -1,12 +1,12 @@
 import { Router } from "express";
 import {
   getMunicipalities,
-  getMunicipalityBySlug,
+  getMunicipalityDetails,
 } from "../controllers/municipality.controller";
 
 const router = Router();
 
 router.get("/", getMunicipalities);
-router.get("/:slug", getMunicipalityBySlug);
+router.get("/:idOrSlug", getMunicipalityDetails);
 
 export default router;

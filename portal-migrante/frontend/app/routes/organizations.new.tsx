@@ -1,4 +1,3 @@
-// frontend/app/routes/organizations.new.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -6,6 +5,7 @@ import {
   type OrganizationStatus,
   type OrganizationType,
 } from "../services/organizations.service";
+import { useI18n } from "../i18n";
 
 function slugify(text: string) {
   return text
@@ -18,6 +18,7 @@ function slugify(text: string) {
 
 export default function NewOrganizationPage() {
   const navigate = useNavigate();
+  const { t } = useI18n();
 
   const [formData, setFormData] = useState({
     type: "association" as OrganizationType,
@@ -84,13 +85,13 @@ export default function NewOrganizationPage() {
         status: formData.status,
       });
 
-      setSuccess("Organización creada correctamente.");
+      setSuccess(t("organization_create_success"));
 
       setTimeout(() => {
         navigate("/organizations");
       }, 700);
     } catch (err: any) {
-      setError(err.message || "Error al crear la organización");
+      setError(err.message || t("organization_create_error"));
     } finally {
       setSaving(false);
     }
@@ -99,50 +100,50 @@ export default function NewOrganizationPage() {
   return (
     <div className="container py-4">
       <div className="mb-4">
-        <h1 className="h4 m-0">Nueva organización</h1>
-        <p className="text-muted mb-0">Crear una asociación, ayuntamiento, centro o institución que pueda publicar en la plataforma.</p>
+        <h1 className="h4 m-0">{t("organization_new_title")}</h1>
+        <p className="text-muted mb-0">{t("organization_new_subtitle")}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="card shadow-sm border-0">
         <div className="card-body">
           <div className="row g-3">
             <div className="col-md-6">
-              <label className="form-label">Tipo</label>
+              <label className="form-label">{t("type")}</label>
               <select
                 name="type"
                 className="form-select"
                 value={formData.type}
                 onChange={handleChange}
               >
-                <option value="municipality">municipality</option>
-                <option value="health_center">health_center</option>
-                <option value="association">association</option>
-                <option value="social_services_office">social_services_office</option>
-                <option value="employment_office">employment_office</option>
-                <option value="legal_office">legal_office</option>
-                <option value="education_center">education_center</option>
-                <option value="community_center">community_center</option>
-                <option value="other">other</option>
+                <option value="municipality">{t("organization_type_municipality")}</option>
+                <option value="health_center">{t("organization_type_health_center")}</option>
+                <option value="association">{t("organization_type_association")}</option>
+                <option value="social_services_office">{t("organization_type_social_services_office")}</option>
+                <option value="employment_office">{t("organization_type_employment_office")}</option>
+                <option value="legal_office">{t("organization_type_legal_office")}</option>
+                <option value="education_center">{t("organization_type_education_center")}</option>
+                <option value="community_center">{t("organization_type_community_center")}</option>
+                <option value="other">{t("organization_type_other")}</option>
               </select>
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Estado</label>
+              <label className="form-label">{t("status")}</label>
               <select
                 name="status"
                 className="form-select"
                 value={formData.status}
                 onChange={handleChange}
               >
-                <option value="active">active</option>
-                <option value="inactive">inactive</option>
-                <option value="pending">pending</option>
-                <option value="archived">archived</option>
+                <option value="active">{t("status_active")}</option>
+                <option value="inactive">{t("status_inactive")}</option>
+                <option value="pending">{t("status_pending")}</option>
+                <option value="archived">{t("status_archived")}</option>
               </select>
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Nombre</label>
+              <label className="form-label">{t("name")}</label>
               <input
                 name="name"
                 className="form-control"
@@ -153,7 +154,7 @@ export default function NewOrganizationPage() {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Slug</label>
+              <label className="form-label">{t("slug")}</label>
               <input
                 name="slug"
                 className="form-control"
@@ -164,7 +165,7 @@ export default function NewOrganizationPage() {
             </div>
 
             <div className="col-12">
-              <label className="form-label">Descripción</label>
+              <label className="form-label">{t("description")}</label>
               <textarea
                 name="description"
                 className="form-control"
@@ -175,7 +176,7 @@ export default function NewOrganizationPage() {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Dirección</label>
+              <label className="form-label">{t("address")}</label>
               <input
                 name="address"
                 className="form-control"
@@ -185,7 +186,7 @@ export default function NewOrganizationPage() {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Teléfono</label>
+              <label className="form-label">{t("phone")}</label>
               <input
                 name="phone"
                 className="form-control"
@@ -195,7 +196,7 @@ export default function NewOrganizationPage() {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Email</label>
+              <label className="form-label">{t("email")}</label>
               <input
                 type="email"
                 name="email"
@@ -206,7 +207,7 @@ export default function NewOrganizationPage() {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Sitio web</label>
+              <label className="form-label">{t("website")}</label>
               <input
                 name="website"
                 className="form-control"
@@ -216,18 +217,18 @@ export default function NewOrganizationPage() {
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Idiomas</label>
+              <label className="form-label">{t("languages")}</label>
               <input
                 name="languages"
                 className="form-control"
                 value={formData.languages}
                 onChange={handleChange}
-                placeholder="es, ar, fr, en"
+                placeholder={t("languages_placeholder")}
               />
             </div>
 
             <div className="col-md-6">
-              <label className="form-label">Logo (URL)</label>
+              <label className="form-label">{t("logo_url")}</label>
               <input
                 name="logo"
                 className="form-control"
@@ -247,7 +248,7 @@ export default function NewOrganizationPage() {
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="verified">
-                  Verificada
+                  {t("verified")}
                 </label>
               </div>
             </div>
@@ -263,10 +264,10 @@ export default function NewOrganizationPage() {
             className="btn btn-outline-secondary"
             onClick={() => navigate("/organizations")}
           >
-            Cancelar
+            {t("cancel")}
           </button>
           <button type="submit" className="btn btn-dark" disabled={saving}>
-            {saving ? "Guardando..." : "Crear organización"}
+            {saving ? t("saving") : t("create_organization")}
           </button>
         </div>
       </form>

@@ -7,13 +7,14 @@ import {
   updateOrganization,
   deleteOrganization,
 } from "../controllers/organization.controller";
+import requireWriteAccess from "../middlewares/requireWriteAccess";
 
 const router = Router();
 
-router.route("/").get(getOrganizations).post(createOrganization);
+router.route("/").get(getOrganizations).post(requireWriteAccess, createOrganization);
 router.route("/:id")
   .get(getOrganizationById)
-  .put(updateOrganization)
-  .delete(deleteOrganization);
+  .put(requireWriteAccess, updateOrganization)
+  .delete(requireWriteAccess, deleteOrganization);
 
 export default router;

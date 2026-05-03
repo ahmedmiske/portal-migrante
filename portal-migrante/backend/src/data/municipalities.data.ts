@@ -686,7 +686,7 @@ export const municipalitiesData = [
     "population": 260699,
     "mayor": "MAIDER ETXEBARRIA GARCIA",
     "party": "PSE-EE (PSOE)",
-    "website": null,
+    "website": "https://www.vitoria-gasteiz.org/",
     "status": "active"
   },
   {

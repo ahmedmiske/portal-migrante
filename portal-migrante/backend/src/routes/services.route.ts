@@ -7,10 +7,15 @@ import {
   updateService,
   deleteService,
 } from "../controllers/services.controller";
+import requireWriteAccess from "../middlewares/requireWriteAccess";
 
 const router = Router();
 
-router.route("/").get(getServices).post(createService);
-router.route("/:id").get(getServiceById).put(updateService).delete(deleteService);
+router.route("/").get(getServices).post(requireWriteAccess, createService);
+router
+  .route("/:id")
+  .get(getServiceById)
+  .put(requireWriteAccess, updateService)
+  .delete(requireWriteAccess, deleteService);
 
 export default router;

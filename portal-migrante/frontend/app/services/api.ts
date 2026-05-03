@@ -16,7 +16,14 @@ export async function http<T = any>(
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(text || `Request failed (${res.status})`);
+    let message = text;
+    try {
+      const data = JSON.parse(text) as { message?: string; error?: string };
+      message = data.message || data.error || text;
+    } catch {
+      message = text;
+    }
+    throw new Error(message || `Request failed (${res.status})`);
   }
 
   return res.json().catch(() => ({})) as Promise<T>;

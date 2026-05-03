@@ -1,14 +1,13 @@
-// frontend/app/components/LanguageSwitcher.tsx
 import { useI18n } from "../i18n";
 
 export default function LanguageSwitcher() {
-  const { locale, setLocale, locales } = useI18n();
+  const { locale, setLocale, locales, t } = useI18n();
 
   const languageNames = {
     eu: "Euskera",
     es: "Español",
-    en: "English", 
-    ar: "العربية"
+    en: "English",
+    ar: "العربية",
   };
 
   return (
@@ -17,7 +16,7 @@ export default function LanguageSwitcher() {
         className="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-2 pr-8 text-sm font-medium text-vitoria-black focus:outline-none focus:ring-2 focus:ring-vitoria-green focus:border-transparent hover:border-vitoria-green transition-colors cursor-pointer"
         value={locale}
         onChange={(e) => setLocale(e.target.value as any)}
-        aria-label="Language"
+        aria-label={t("language_label")}
       >
         {locales.map((l) => (
           <option key={l} value={l}>

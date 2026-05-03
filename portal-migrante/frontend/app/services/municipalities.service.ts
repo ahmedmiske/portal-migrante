@@ -22,7 +22,7 @@ export const municipalitiesService = {
     return http<Municipality[]>("/municipalities");
   },
 
-  async getById(id: string) {
-    return http<Municipality>(`/municipalities/${id}`);
+  async getBySlug(slug: string) {
+    return http<Municipality>(`/municipalities/${slug}`);
   },
 };

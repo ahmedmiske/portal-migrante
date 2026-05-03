@@ -12,9 +12,26 @@ export interface IUser extends Document {
   displayName?: string;
   email: string;
   phone?: string;
+  phoneVerified: boolean;
+  phoneVerificationCodeHash?: string;
+  phoneVerificationExpiresAt?: Date;
+  phoneVerificationSentAt?: Date;
+  phoneVerificationAttempts: number;
   passwordHash?: string;
   preferredLanguage?: string;
+  originCountry?: string;
+  nativeLanguage?: string;
+  municipality?: string;
   profileImage?: string;
+  identityDocument?: {
+    fileName: string;
+    mimeType: string;
+    size: number;
+    dataUrl: string;
+    uploadedAt: Date;
+  };
+  legalConsentAccepted: boolean;
+  legalConsentAt?: Date;
   organizationId?: Types.ObjectId | null;
   status: "active" | "inactive" | "pending" | "blocked";
   isVerified: boolean;
@@ -61,6 +78,30 @@ const userSchema = new Schema<IUser>(
       type: String,
       trim: true,
     },
+    phoneVerified: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    phoneVerificationCodeHash: {
+      type: String,
+      trim: true,
+      select: false,
+    },
+    phoneVerificationExpiresAt: {
+      type: Date,
+      select: false,
+    },
+    phoneVerificationSentAt: {
+      type: Date,
+      select: false,
+    },
+    phoneVerificationAttempts: {
+      type: Number,
+      default: 0,
+      required: true,
+      select: false,
+    },
     passwordHash: {
       type: String,
       trim: true,
@@ -71,9 +112,48 @@ const userSchema = new Schema<IUser>(
       trim: true,
       default: "es",
     },
+    originCountry: {
+      type: String,
+      trim: true,
+    },
+    nativeLanguage: {
+      type: String,
+      trim: true,
+    },
+    municipality: {
+      type: String,
+      trim: true,
+    },
     profileImage: {
       type: String,
       trim: true,
+    },
+    identityDocument: {
+      fileName: {
+        type: String,
+        trim: true,
+      },
+      mimeType: {
+        type: String,
+        trim: true,
+      },
+      size: {
+        type: Number,
+      },
+      dataUrl: {
+        type: String,
+      },
+      uploadedAt: {
+        type: Date,
+      },
+    },
+    legalConsentAccepted: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    legalConsentAt: {
+      type: Date,
     },
     organizationId: {
       type: Schema.Types.ObjectId,

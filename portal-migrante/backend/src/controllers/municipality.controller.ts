@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import mongoose from "mongoose";
 import Municipality from "../models/municipality.model";
 
 export const getMunicipalities = async (
@@ -36,15 +37,17 @@ export const getMunicipalities = async (
   }
 };
 
-export const getMunicipalityBySlug = async (
+export const getMunicipalityDetails = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
-    const item = await Municipality.findOne({
-      slug: req.params.slug,
-      status: "active",
-    });
+    const value = req.params.idOrSlug;
+    const filter = mongoose.Types.ObjectId.isValid(value)
+      ? { _id: value, status: "active" }
+      : { slug: value, status: "active" };
+
+    const item = await Municipality.findOne(filter);
 
     if (!item) {
       res.status(404).json({ message: "Municipality not found" });

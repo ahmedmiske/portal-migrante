@@ -6,7 +6,7 @@
    Buttons & Links (components)
    ========================= */
 @layer components {
-  /* زر أساسي مشترك */
+  /* Base button */
   .btn {
     @apply inline-flex items-center justify-center
            rounded-lg px-4 py-2 text-sm font-medium
@@ -14,7 +14,7 @@
            focus-visible:ring-2 focus-visible:ring-offset-2;
   }
 
-  /* Primary — يستخدم الأخضر الرسمي */
+  /* Primary button */
   .btn-primary {
     @apply inline-flex items-center justify-center
            rounded-lg px-4 py-2 text-sm font-medium
@@ -24,26 +24,26 @@
            hover:bg-vitoria-black active:bg-vitoria-gray;
   }
 
-  /* Ghost — زر شفاف (مثلاً للهامبرغر أو أيقونات) */
+  /* Ghost button */
   .btn-ghost {
     @apply inline-flex items-center justify-center
            rounded-lg px-3 py-2 text-sm font-medium
            transition text-vitoria-black hover:bg-neutral-100;
   }
 
-  /* روابط النافبار */
+  /* Navigation links */
   .link-nav {
     @apply inline-flex items-center gap-1 px-3 py-2 rounded-md
            text-sm text-vitoria-black hover:text-vitoria-white
            hover:bg-vitoria-green;
   }
 
-  /* حالة مفعّلة للـ nav */
+  /* Active navigation state */
   .link-nav-active {
     @apply bg-vitoria-green text-vitoria-white;
   }
 
-  /* شارة اللغة */
+  /* Language badge */
   .lang-badge {
     @apply rounded-md border px-2 py-1 text-sm border-vitoria-green text-vitoria-green;
   }

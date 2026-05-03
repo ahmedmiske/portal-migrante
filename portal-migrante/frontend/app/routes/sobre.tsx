@@ -1,263 +1,227 @@
-import { useI18n } from "../i18n";
 import { Link } from "react-router-dom";
+import { useI18n } from "../i18n";
+
+function MiniIcon({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-vitoria-green text-xl text-white">
+      {children}
+    </div>
+  );
+}
 
 export default function Sobre() {
   const { t } = useI18n();
 
-  const teamMembers = [
-    {
-      name: "Dr. Ana García",
-      role: t("team_director"),
-      image: "/team/ana.jpg",
-      description: t("ana_description")
-    },
-    {
-      name: "Mohamed Al-Hassan",
-      role: t("team_coordinator"),
-      image: "/team/mohamed.jpg",
-      description: t("mohamed_description")
-    },
-    {
-      name: "Elena Rodríguez",
-      role: t("team_social_worker"),
-      image: "/team/elena.jpg",
-      description: t("elena_description")
-    },
-    {
-      name: "Amir Khalil",
-      role: t("team_translator"),
-      image: "/team/amir.jpg",
-      description: t("amir_description")
-    }
+  const values = [
+    "about_value_clarity",
+    "about_value_access",
+    "about_value_community",
+    "about_value_data",
   ];
 
-  const stats = [
-    { number: "5,000+", label: t("stat_users") },
-    { number: "150+", label: t("stat_services") },
-    { number: "25", label: t("stat_languages") },
-    { number: "3", label: t("stat_years") }
+  const platformParts = [
+    { key: "about_part_services", icon: "📘" },
+    { key: "about_part_directory", icon: "🏛️" },
+    { key: "about_part_forum", icon: "💬" },
+    { key: "about_part_culture", icon: "📍" },
+  ];
+
+  const phases = [
+    { title: "about_phase_1_title", desc: "about_phase_1_desc" },
+    { title: "about_phase_2_title", desc: "about_phase_2_desc" },
+    { title: "about_phase_3_title", desc: "about_phase_3_desc" },
+  ];
+
+  const needs = [
+    "about_need_guidance",
+    "about_need_support",
+    "about_need_funding",
+    "about_need_partners",
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-background">
-      {/* Hero Section */}
-      <div className="bg-vitoria-gradient text-white">
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+    <main className="bg-white">
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_88%_78%,rgba(0,151,57,0.82)_0%,rgba(0,151,57,0.42)_24%,transparent_48%),linear-gradient(135deg,#2448ad_0%,#284fb8_46%,#173f89_100%)] text-white">
+        <div className="absolute inset-x-0 top-0 h-3 bg-[linear-gradient(90deg,#009739_0_33%,#ffffff_33%_66%,#d52b1e_66%_100%)]" />
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.82fr] lg:px-8 lg:py-24">
+          <div>
+            <p className="mb-5 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold">
+              {t("about_badge")}
+            </p>
+            <h1 className="text-5xl font-black leading-tight sm:text-6xl">
               {t("about_title")}
             </h1>
-            <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
+            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-200">
               {t("about_subtitle")}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/servicios"
+                className="rounded-lg bg-vitoria-green px-6 py-3 text-center font-bold text-white"
+              >
+                {t("explore_services")}
+              </Link>
+              <Link
+                to="/contacto"
+                className="rounded-lg border border-white/60 px-6 py-3 text-center font-bold text-white"
+              >
+                {t("contact_us")}
+              </Link>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-lg border border-white/70 bg-white/10 backdrop-blur">
+            <img
+              src="/images/registration-migrant-travel-hero.png"
+              alt=""
+              className="h-60 w-full object-cover sm:h-72"
+              style={{ objectPosition: "center 35%" }}
+            />
+            <div className="p-6">
+              <h2 className="text-2xl font-black">{t("about_summary_title")}</h2>
+              <div className="mt-6 grid gap-3">
+              {values.map((key) => (
+                <div key={key} className="rounded-lg bg-white/15 p-4">
+                  <p className="font-semibold">{t(key)}</p>
+                </div>
+              ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+          <div>
+            <p className="text-sm font-bold text-vitoria-green">{t("about_origin_label")}</p>
+            <h2 className="mt-3 text-4xl font-black text-slate-950">
+              {t("about_origin_title")}
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              {t("about_origin_desc")}
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-vitoria-green/20 bg-green-50 p-6">
+            <h3 className="text-2xl font-black text-slate-950">
+              {t("about_lived_title")}
+            </h3>
+            <p className="mt-4 text-lg font-semibold leading-relaxed text-slate-700">
+              {t("about_lived_desc")}
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-16">
-        {/* Mission Section */}
-        <div className="mb-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-vitoria-black mb-6">
-                {t("our_mission")}
-              </h2>
-              <p className="text-lg text-vitoria-gray mb-6 leading-relaxed">
-                {t("mission_description")}
-              </p>
-              <p className="text-lg text-vitoria-gray leading-relaxed">
-                {t("mission_commitment")}
-              </p>
-            </div>
-            <div className="bg-neutral-surface rounded-lg shadow-lg p-8">
-              <div className="text-center">
-                <div className="bg-vitoria-green text-white p-6 rounded-full w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-vitoria-black mb-4">
-                  {t("our_values")}
-                </h3>
-                <ul className="text-vitoria-gray space-y-2">
-                  <li>{t("value_inclusion")}</li>
-                  <li>{t("value_solidarity")}</li>
-                  <li>{t("value_diversity")}</li>
-                  <li>{t("value_empowerment")}</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Statistics */}
-        <div className="mb-16">
-          <div className="bg-neutral-surface rounded-lg shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-vitoria-black text-center mb-8">
-              {t("our_impact")}
+      <section className="bg-slate-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold text-vitoria-green">{t("about_platform_label")}</p>
+            <h2 className="mt-3 text-4xl font-black text-slate-950">
+              {t("about_platform_title")}
             </h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-vitoria-green mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-vitoria-gray font-medium">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              {t("about_platform_desc")}
+            </p>
           </div>
-        </div>
 
-        {/* History Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-vitoria-black text-center mb-12">
-            {t("our_history")}
-          </h2>
-          <div className="space-y-8">
-            <div className="bg-neutral-surface rounded-lg shadow-lg p-8">
-              <div className="flex items-start gap-6">
-                <div className="bg-vitoria-green text-white px-4 py-2 rounded-lg font-bold min-w-[80px] text-center">
-                  2021
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-vitoria-black mb-3">
-                    {t("history_2021_title")}
-                  </h3>
-                  <p className="text-vitoria-gray">
-                    {t("history_2021_description")}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-surface rounded-lg shadow-lg p-8">
-              <div className="flex items-start gap-6">
-                <div className="bg-vitoria-green text-white px-4 py-2 rounded-lg font-bold min-w-[80px] text-center">
-                  2022
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-vitoria-black mb-3">
-                    {t("history_2022_title")}
-                  </h3>
-                  <p className="text-vitoria-gray">
-                    {t("history_2022_description")}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-surface rounded-lg shadow-lg p-8">
-              <div className="flex items-start gap-6">
-                <div className="bg-vitoria-green text-white px-4 py-2 rounded-lg font-bold min-w-[80px] text-center">
-                  2025
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-vitoria-black mb-3">
-                    {t("history_2025_title")}
-                  </h3>
-                  <p className="text-vitoria-gray">
-                    {t("history_2025_description")}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Team Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-vitoria-black text-center mb-12">
-            {t("our_team")}
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="bg-neutral-surface rounded-lg shadow-lg p-6 text-center">
-                <div className="w-24 h-24 bg-vitoria-gray/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-vitoria-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-bold text-vitoria-black mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-vitoria-green font-medium mb-3">
-                  {member.role}
-                </p>
-                <p className="text-sm text-vitoria-gray">
-                  {member.description}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {platformParts.map((part) => (
+              <div key={part.key} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                <MiniIcon>{part.icon}</MiniIcon>
+                <p className="mt-6 text-xl font-black leading-relaxed text-slate-950">
+                  {t(part.key)}
                 </p>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Partners Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-vitoria-black text-center mb-12">
-            {t("our_partners")}
-          </h2>
-          <div className="bg-neutral-surface rounded-lg shadow-lg p-8">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="bg-brand-primary text-white p-6 rounded-lg mb-4">
-                  <h3 className="text-lg font-bold">{t("government_euskadi")}</h3>
-                </div>
-                <p className="text-vitoria-gray text-sm">
-                  {t("partner_government_description")}
-                </p>
-              </div>
-              
-              <div>
-                <div className="bg-vitoria-green text-white p-6 rounded-lg mb-4">
-                  <h3 className="text-lg font-bold">{t("civil_organizations")}</h3>
-                </div>
-                <p className="text-vitoria-gray text-sm">
-                  {t("partner_civil_description")}
-                </p>
-              </div>
-              
-              <div>
-                <div className="bg-brand-accent text-white p-6 rounded-lg mb-4">
-                  <h3 className="text-lg font-bold">{t("international_orgs")}</h3>
-                </div>
-                <p className="text-vitoria-gray text-sm">
-                  {t("partner_international_description")}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="bg-vitoria-gradient text-white rounded-lg shadow-lg p-12">
-            <h2 className="text-3xl font-bold mb-6">
-              {t("join_us_title")}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+          <div>
+            <p className="text-sm font-bold text-vitoria-green">{t("about_impact_label")}</p>
+            <h2 className="mt-3 text-4xl font-black text-slate-950">
+              {t("about_impact_title")}
             </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              {t("join_us_description")}
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              {t("about_impact_desc")}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contacto"
-                className="btn-primary bg-white text-vitoria-green hover:bg-gray-100"
-              >
-                {t("contact_us")}
-              </Link>
-              <Link
-                to="/servicios"
-                className="btn bg-transparent border-2 border-white text-white hover:bg-white hover:text-vitoria-green transition-colors"
-              >
-                {t("explore_services")}
-              </Link>
-            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              "home_impact_access",
+              "home_impact_basque_image",
+              "home_impact_data",
+              "home_impact_cohesion",
+            ].map((key) => (
+              <div key={key} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+                <span className="text-xl font-black text-vitoria-green">✓</span>
+                <p className="mt-4 text-lg font-bold leading-relaxed text-slate-950">{t(key)}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="bg-[radial-gradient(circle_at_88%_78%,rgba(0,151,57,0.82)_0%,rgba(0,151,57,0.42)_24%,transparent_48%),linear-gradient(135deg,#2448ad_0%,#284fb8_46%,#173f89_100%)] py-16 text-white sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold text-green-300">{t("about_plan_label")}</p>
+            <h2 className="mt-3 text-4xl font-black">{t("about_plan_title")}</h2>
+          </div>
+
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {phases.map((phase, index) => (
+              <div key={phase.title} className="rounded-lg border border-white/15 bg-white/10 p-6">
+                <div className="mb-6 text-sm font-black text-green-300">0{index + 1}</div>
+                <h3 className="text-2xl font-black">{t(phase.title)}</h3>
+                <p className="mt-4 leading-relaxed text-slate-200">{t(phase.desc)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+          <div>
+            <p className="text-sm font-bold text-vitoria-green">{t("about_needs_label")}</p>
+            <h2 className="mt-3 text-4xl font-black text-slate-950">
+              {t("about_needs_title")}
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              {t("about_needs_desc")}
+            </p>
+          </div>
+
+          <div className="grid gap-4">
+            {needs.map((key) => (
+              <div key={key} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+                <p className="text-lg font-bold text-slate-950">{t(key)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-lg bg-vitoria-green p-8 text-white sm:flex sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-3xl font-black">{t("about_cta_title")}</h2>
+              <p className="mt-3 text-lg text-white/90">{t("about_cta_desc")}</p>
+            </div>
+            <Link
+              to="/contacto"
+              className="mt-6 inline-flex rounded-lg bg-white px-6 py-4 text-lg font-black text-vitoria-green sm:mt-0"
+            >
+              {t("contact_us")}
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

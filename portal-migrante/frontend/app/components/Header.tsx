@@ -2,11 +2,16 @@ import { NavLink, Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useI18n } from "../i18n";
 import { useState, useEffect } from "react";
+import { usersService, type User } from "../services/users.service";
 
 export default function Header() {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(() =>
+    usersService.getCurrentUser()
+  );
 
   const navItems = [
     { 
@@ -27,21 +32,22 @@ export default function Header() {
         </svg>
       )
     },
-    { 
-      to: "/anuncios", 
-      label: t("nav_ads"),
+    {
+      to: "/foro",
+      label: t("nav_forum"),
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h8M8 14h5M5 19l-2 2V5a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5z" />
         </svg>
       )
     },
-    { 
-      to: "/observatorio", 
-      label: t("nav_observatory"),
+    {
+      to: "/cultura-vasca",
+      label: t("nav_basque_culture"),
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 21c4-4 7-7.5 7-11a7 7 0 10-14 0c0 3.5 3 7 7 11z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 10h6M12 7v6" />
         </svg>
       )
     },
@@ -74,6 +80,48 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    return usersService.onCurrentUserChange(() => {
+      setCurrentUser(usersService.getCurrentUser());
+      setUserMenuOpen(false);
+    });
+  }, []);
+
+  const logout = () => {
+    usersService.logout();
+    setCurrentUser(null);
+    setUserMenuOpen(false);
+    setOpen(false);
+  };
+
+  const userName = currentUser?.displayName || currentUser?.fullName || "";
+
+  const userSummary = currentUser && (
+    <div className="rounded-xl border border-gray-200 bg-white p-3 text-sm shadow-lg">
+      <div className="font-semibold text-vitoria-black">
+        {t("welcome_user")}، {userName}
+      </div>
+      <div className="mt-2 space-y-1 text-vitoria-gray">
+        <div>{currentUser.email}</div>
+        {currentUser.phone && <div>{currentUser.phone}</div>}
+        {currentUser.originCountry && <div>{currentUser.originCountry}</div>}
+        {currentUser.nativeLanguage && <div>{currentUser.nativeLanguage}</div>}
+      </div>
+      {(currentUser.phoneVerified || currentUser.isVerified) && (
+        <div className="mt-2 inline-flex rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+          {t("phone_verified_short")}
+        </div>
+      )}
+      <button
+        type="button"
+        className="mt-3 w-full rounded-xl border border-gray-300 px-3 py-2 font-semibold text-vitoria-black transition hover:border-vitoria-green hover:text-vitoria-green"
+        onClick={logout}
+      >
+        {t("logout")}
+      </button>
+    </div>
+  );
+
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
@@ -96,10 +144,10 @@ export default function Header() {
             </div>
             <div className="hidden sm:block">
               <div className="font-bold text-xl text-vitoria-black group-hover:text-vitoria-green transition-colors duration-300">
-                Portal Migrante
+                {t("portal_brand")}
               </div>
               <div className="text-xs text-vitoria-gray font-medium tracking-wide">
-                EUSKADI
+                {t("portal_region")}
               </div>
             </div>
           </Link>
@@ -131,30 +179,55 @@ export default function Header() {
 
         {/* Right side actions */}
         <div className="hidden lg:flex items-center gap-4">
-          {/* Language Switcher */}
-          <div className="relative">
-            <LanguageSwitcher />
-          </div>
+          <LanguageSwitcher />
 
-          {/* CTA Button - Desktop - تم تصغيره إلى px-4 py-2 text-xs */}
-          <Link 
-            to="/users/new" 
-            className="group relative inline-flex items-center gap-2 bg-vitoria-gradient text-white px-4 py-2 rounded-xl font-semibold text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
-          >
-            <svg className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-            {t("users_new")}
-            <div className="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </Link>
+          {currentUser ? (
+            <div className="relative">
+              <button
+                type="button"
+                className="inline-flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-semibold text-vitoria-black shadow-sm transition hover:border-vitoria-green"
+                onClick={() => setUserMenuOpen((value) => !value)}
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-vitoria-green text-white">
+                  {(userName || "?").slice(0, 1).toUpperCase()}
+                </span>
+                <span className="text-start">
+                  <span className="block text-xs text-vitoria-gray">
+                    {t("welcome_user")}
+                  </span>
+                  <span className="block max-w-36 truncate">{userName}</span>
+                </span>
+              </button>
+              {userMenuOpen && (
+                <div className="absolute end-0 mt-2 w-72">{userSummary}</div>
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                to="/users/login"
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2 text-xs font-semibold text-vitoria-black shadow-sm transition hover:border-vitoria-green hover:text-vitoria-green"
+              >
+                {t("login_button")}
+              </Link>
+              <Link 
+                to="/users/new" 
+                className="group relative inline-flex items-center gap-2 bg-vitoria-gradient text-white px-4 py-2 rounded-xl font-semibold text-xs shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
+              >
+                <svg className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                {t("users_new")}
+                <div className="absolute inset-0 bg-white/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Mobile actions */}
         <div className="lg:hidden flex items-center gap-3">
-          <div className="relative">
-            <LanguageSwitcher />
-          </div>
-          
+          <LanguageSwitcher />
+
           <button
             className={`relative p-2 rounded-xl transition-all duration-300 ${
               open 
@@ -210,18 +283,30 @@ export default function Header() {
                 </NavLink>
               ))}
               
-              {/* Mobile CTA - تم تصغيره إلى py-3 */}
               <div className="pt-4 border-t border-gray-200/50 mt-2">
-                <Link
-                  to="/users/new"
-                  className="group flex items-center justify-center gap-2 bg-vitoria-gradient text-white !px-4 !py-2 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300"
-                  onClick={() => setOpen(false)}
-                >
-                  <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                  {t("users_new")}
-                </Link>
+                {currentUser ? (
+                  <div>{userSummary}</div>
+                ) : (
+                  <div className="grid gap-2">
+                    <Link
+                      to="/users/login"
+                      className="flex items-center justify-center rounded-xl border border-gray-300 bg-white !px-4 !py-2 font-semibold text-vitoria-black shadow-sm transition hover:border-vitoria-green hover:text-vitoria-green"
+                      onClick={() => setOpen(false)}
+                    >
+                      {t("login_button")}
+                    </Link>
+                    <Link
+                      to="/users/new"
+                      className="group flex items-center justify-center gap-2 bg-vitoria-gradient text-white !px-4 !py-2 rounded-xl font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300"
+                      onClick={() => setOpen(false)}
+                    >
+                      <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                      {t("users_new")}
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>

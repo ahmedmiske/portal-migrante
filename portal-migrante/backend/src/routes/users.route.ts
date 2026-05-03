@@ -2,15 +2,28 @@
 import { Router } from "express";
 import {
   createUser,
+  registerUser,
+  loginUser,
+  sendPhoneVerificationCode,
+  verifyPhoneCode,
   getUsers,
   getUserById,
   updateUser,
   deleteUser,
 } from "../controllers/user.controller";
+import requireWriteAccess from "../middlewares/requireWriteAccess";
 
 const router = Router();
 
-router.route("/").get(getUsers).post(createUser);
-router.route("/:id").get(getUserById).put(updateUser).delete(deleteUser);
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+router.post("/:id/send-phone-code", sendPhoneVerificationCode);
+router.post("/:id/verify-phone", verifyPhoneCode);
+router.route("/").get(getUsers).post(requireWriteAccess, createUser);
+router
+  .route("/:id")
+  .get(getUserById)
+  .put(requireWriteAccess, updateUser)
+  .delete(requireWriteAccess, deleteUser);
 
 export default router;
