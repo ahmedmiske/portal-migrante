@@ -73,11 +73,18 @@ app.use(notFound);
 app.use(errorHandler);
 
 async function bootstrap(): Promise<void> {
-  await connectDB(MONGO_URI);
-
   const server = app.listen(PORT, () => {
     console.log(`API running on http://localhost:${PORT}`);
   });
+
+  try {
+    await connectDB(MONGO_URI);
+  } catch (err) {
+    console.error(
+      "MongoDB connection failed. API will keep running with read-only fallback data where available.",
+      err
+    );
+  }
 
   const shutdown = async (signal: string) => {
     console.log(`\n${signal} received. Closing gracefully...`);
