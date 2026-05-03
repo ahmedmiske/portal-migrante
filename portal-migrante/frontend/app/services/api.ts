@@ -1,6 +1,13 @@
 // frontend/app/services/api.ts
-export const API_BASE =
-  import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+const rawApiBase =
+  (import.meta.env.VITE_API_URL as string | undefined) ||
+  "http://localhost:4000/api";
+
+const normalizedApiBase = rawApiBase.replace(/\/+$/, "");
+
+export const API_BASE = normalizedApiBase.endsWith("/api")
+  ? normalizedApiBase
+  : `${normalizedApiBase}/api`;
 
 export async function http<T = any>(
   path: string,
